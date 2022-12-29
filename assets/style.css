@@ -1,0 +1,61 @@
+.alineaIzq{
+    flex-grow: 0;
+}
+nav img{
+    width: 20vh;
+}
+.rowHome{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    gap: 1rem;
+}
+
+/*.form{
+    display: flex;
+    justify-content: wrap;
+}*/
+.cardsalign{
+    margin-top: 4rem !important;
+    align-content: stretch;
+}
+.footerCards{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+}
+.fa-brands {
+   font-size: 30px;
+}
+.p {
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    font-size: 20px;
+}
+.imgs {
+    display: flex;
+    justify-content: flex-start;
+    height: 3rem;
+}
+/*.card{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}*/
+.tabla-align-center{
+    text-align: center
+}
+footer{
+    margin-top: 60%;
+}
+.cardDetail{
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    margin-top: 2rem;
+}
+.shadowImgCard{
+    box-shadow: 10px 10px 10px 4px rgba(0, 0, 0, 0.2) ;
+}
