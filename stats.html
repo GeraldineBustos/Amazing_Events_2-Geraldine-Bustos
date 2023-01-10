@@ -8,7 +8,7 @@
   <link rel="stylesheet" href="./assets/style.css">
   <script src="https://kit.fontawesome.com/e7963be4ed.js" crossorigin="anonymous"></script>
   <!--CSS Bootstrap-->
-  
+
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
 
 
@@ -56,19 +56,19 @@
       <tr>
         <th colspan="3">Events statistics</th>
       </tr>
-    </thead>
-    <tbody>
       <tr>
 
         <td>Events with the highest percentage of attendance</td>
-        <td>Events with the highest percentage of attendance</td>
+        <td>Events with the lowest percentage of attendance</td>
         <td>Event with larger capacity</td>
       </tr>
-      <tr>
+    </thead>
+    <tbody id="tabla1">
 
-        <td><br></td>
-        <td><br></td>
-        <td><br></td>
+      <tr>
+        <td id="maporcentaje"></td>
+        <td id="meporcentaje"></td>
+        <td id="eventmayor"></td>
       </tr>
     </tbody>
   </table>
@@ -78,26 +78,16 @@
       <tr>
         <th colspan="3">Upcoming events statistics by category</th>
       </tr>
-    </thead>
-
-    <tbody>
       <tr>
         <td>Categories</td>
         <td>Revenues</td>
         <td>Percentage of attendance</td>
       </tr>
-      <tr>
+    </thead>
 
-        <td><br></td>
-        <td><br></td>
-        <td><br></td>
-      </tr>
-      <tr>
+    <tbody id="tabla2">
 
-        <td><br></td>
-        <td><br></td>
-        <td><br></td>
-      </tr>
+
 
     </tbody>
   </table>
@@ -107,15 +97,16 @@
       <tr>
         <th colspan="3">Past Events statistics by category</th>
       </tr>
-    </thead>
-    <tbody>
-
       <tr>
 
         <td>Categories</td>
         <td>Revenues</td>
         <td>Percentage of attendance</td>
       </tr>
+    </thead>
+    <tbody id="tabla3">
+
+
       <tr>
 
         <td><br></td>
@@ -148,6 +139,7 @@
 
   </footer>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="./assets/stats.js"></script>
 </body>
 
 </html>
