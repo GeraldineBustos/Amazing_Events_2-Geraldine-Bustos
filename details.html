@@ -51,57 +51,31 @@
       </div>
     </nav>
   </header>
-
-  <main class="cardDetail" id="detailed-card">
-  <!-- <div class="card mb-3 " >
-      <div class="row g-0 ">
+<div id="app">
+  <main class="cardDetail" id="detailed-card" v-if="eventoPorId">
+  <div class="card mb-3 cardDetailCenter" >
+      <div class="row g-0 " style="height: 400px;">
         <div class="col-md-6 " style="padding: 20px; ">
-          <img src="https://i.postimg.cc/Fs03hQDt/Collectivities-Party.jpg" class="card-img-top shadowImgCard" alt="Bootstrap"
-            >
+          <img v-bind:src="eventoPorId.image" class="card-img-top shadowImgCard" :alt="eventoPorId.name">
         </div>
-        <div class="col-md-6">
-          <div class="card-body" style="padding: 20px; ">
-            <h5 class="card-title">Collectivities Party</h5>
+        <div class="col-md-6" style="padding: 20px; ">
+          <div class="card-body" style="padding: 20px; size: 30px;">
+            <h5 class="card-title">{{eventoPorId.name}}</h5>
             <p class="card-text">Enjoy your favourite dishes, from different countries, in a unique event for the whole
-              family.</p>
-            <p class="card-text">Category: "Food Fair".</p>
-            <p class="card-text">Place: Room A</p>
-            <p class="card-text">Capacity: 45000</p>
-            <p class="card-text">Assistance: 42756</p>
-            <p class="card-text">Price: 5</p>
+              family.{{eventoPorId.description}}</p>
+            <p class="card-text">Category: {{eventoPorId.category}}.</p>
+            <p class="card-text">Place: {{eventoPorId.place}}</p>
+            <p class="card-text" v-if="eventoPorId.estimate">Estimate: {{eventoPorId.estimate}}</p>
+            <p class="card-text" v-if="eventoPorId.assistance">Assistance: {{eventoPorId.assistance}}</p>
+            <p class="card-text">Price: ${{eventoPorId.price}}</p>
           </div>
         </div>
       </div>
-    </div> -->
-    <!-- Example Code 
-
-    <div class="card mb-3" style="max-width: 540px;">
-      <div class="row g-0">
-        <div class="col-md-4">
-          <svg class="bd-placeholder-img img-fluid rounded-start" width="100%" height="250"
-            xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Image"
-            preserveAspectRatio="xMidYMid slice" focusable="false">
-            <title>Placeholder</title>
-            <rect width="100%" height="100%" fill="#868e96"></rect><text x="50%" y="50%" fill="#dee2e6"
-              dy=".3em">Image</text>
-          </svg>
-
-        </div>
-        <div class="col-md-8">
-          <div class="card-body">
-            <h5 class="card-title">Card title</h5>
-            <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional
-              content. This content is a little bit longer.</p>
-            <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    End Example Code -->
+    </div> 
+   
 
   </main>
-
+</div>
 
   <footer class="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top">
     <ul class="nav col-md-4 justify-content-end list-unstyled d-flex">
@@ -119,7 +93,7 @@
   </footer>
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
-  
+  <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
   <script src="./assets/details.js"></script>
 
 </body>

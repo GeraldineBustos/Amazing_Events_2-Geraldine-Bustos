@@ -29,10 +29,10 @@
         <div class="collapse navbar-collapse " id="navbarSupportedContent">
           <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
             <li class="nav-item">
-              <a class="nav-link active" aria-current="page" href="./index.html">Home</a>
+              <a class="nav-link " aria-current="page" href="./index.html">Home</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#">Upcoming Events</a>
+              <a class="nav-link active" href="#">Upcoming Events</a>
             </li>
             <li class="nav-item dropdown">
               <a class="nav-link" href="./past.html">Past Events</a>
@@ -56,29 +56,45 @@
       </div>
 
     </div>
-    <div class="row rowHome row-cols-lg-auto g-3 align-items-center">
-      <!--check-->
-      <form class="row row-cols-lg-auto g-3 align-items-center" id="checkbox3">
-        
-      </form><!--Fin Check-->
-  <!--Search-->
-      <div class="col-12">
-        <div class="input-group">
-          <form class="d-flex" role="search">
-            <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" id="search1">
-            <button class="btn btn-outline-success" type="submit">Search</button>
-          </form>
-        </div>
-      </div><!--Fin Search-->
-    </div>
-    <!--Cards-->
-    <div id="cards-section2" class="row rowHome cardsalign">
-
-    </div>
-
+    <div id="app">
       
+      <div class="row rowHome row-cols-lg-auto g-3 align-items-center">
+        <!--check-->
+        <form class="row row-cols-lg-auto g-3 align-items-center " id="checkbox3">
+          <div class="form-check d-flex"  v-for="categoria of categorias" v-if="categorias">   
+            <label class="form-check-label">{{categoria}}
+            <input class="form-check-input" type="checkbox" @change="filtroCruzado" v-model="checked" :value="categoria">
+            </label>
+            </div>
+        </form>
+        <!--Fin check-->
+        <!--search-->
+        <div class="col-12">
+          <div class="input-group">
+            <form class="d-flex" role="search" id="search">
+              <input class="form-control me-2" @keyup="filtroCruzado" v-model="valorDeBusqueda" type="search" placeholder="Search" aria-label="Search" id="search1">
+              <button class="btn btn-outline-success" type="submit">Search</button>
+            </form>
+          </div>
+        </div>
+      </div>
+      <!--Fin search-->
+      <!--Cards-->
+      <div id="cards-section" class="row rowHome cardsalign sectionHome  " >
+        <div class="card" style="width: 20rem;" v-for = "evento of eventosFiltrados"  v-if="eventosFiltrados" id="cards-section">
+          <img v-bind:src="evento.image" class="card-img-top" :alt="evento.name">
+          <div class="card-body">
+            <h5 class="card-title">{{evento.name}}</h5>
+            <p class="card-text">{{evento.description}}</p>
+            <p class="card-text">Date: {{evento.date}}</p>
+            <p class="card-text">Price: ${{evento.price}}</p>
+            <a :href='"./details.html?idUrl="+evento._id' class=" btn btn-primary">View More</a> 
+          </div>
+        </div>
 
-    <!--Fin Cards-->
+      </div>
+      <h3 v-if="eventosFiltrados && !eventosFiltrados.length">THERES NO COICIDENCES WITH YOUR SEARCH </h3>
+    </div><!--Fin Cards-->
   </main>
 
   <footer class="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top">
@@ -96,8 +112,8 @@
 
   </footer>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
-  
-<script src="./assets/upcoming.js"></script>
+  <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+  <script src="./assets/upcoming.js"></script>
 </body>
 
 </html>

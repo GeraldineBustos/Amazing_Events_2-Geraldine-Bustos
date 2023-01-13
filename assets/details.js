@@ -1,4 +1,44 @@
-let cadenaParametroUrl = location.search//traemos el url como string
+const  { createApp } = Vue
+
+createApp( {
+    data(){
+        return {
+            
+            eventos : undefined,
+            parametros: undefined,
+            id: undefined,
+            eventoPorId:undefined,
+            
+        }
+    },
+    created(){
+        fetch("https://mindhub-xj03.onrender.com/api/amazing")
+        .then(datos => datos.json())
+        
+        .then(datos => {
+           
+                
+                 this.eventos = datos.events
+                 this.parametros = new URLSearchParams(location.search)
+                 this.id = this.parametros.get('idUrl')
+                 this.eventoPorId = this.eventos.find(evento => evento._id == this.id)
+                 
+        } ) 
+        .catch( err => console.log(err))
+    },
+    
+}).mount('#app')
+
+
+
+
+
+
+
+
+
+
+/*let cadenaParametroUrl = location.search//traemos el url como string
 let parametros = new URLSearchParams(cadenaParametroUrl)//agarra el string y lo convierte a objeto
 let idCard = parametros.get("idUrl") //es un nombre del id que usamos para ocupar el get o para filtrar cada carta
 
@@ -56,5 +96,5 @@ function pintarCard(propiedadEvents, contenedor){
                     </section>`
 
     contenedor.innerHTML = template
-}
+}*/
 

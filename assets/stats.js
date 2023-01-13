@@ -1,16 +1,100 @@
-let $stat1 = document.getElementById("tabla1")
+const {createApp}= Vue
+
+createApp({
+    data(){
+        return{
+            data: undefined,
+            upcomingFiltro: undefined,
+            pastFiltro: undefined,
+            percentajeMinMax:[],
+        }
+    },
+    created(){
+        fetch("https://mindhub-xj03.onrender.com/api/amazing")
+            .then( response => response.json())
+            .then(info => {
+                this.data= info
+                this.upcomingFiltro = this.data.events.filter(evento => evento.date > this.data.currentDate)
+                this.pastFiltro = this.data.events.filter(evento => evento.date < this.data.currentDate)
+                let porcentajeEventos = this.newPropiedadPorcentaje(this.data)
+                this.maxCapacidad(this.data.events)
+                this.maxPercentaje(porcentajeEventos)
+                this.minPercentaje(porcentajeEventos)
+                
+                
+    })
+    .catch(err => console.log (err))
+},
+methods:{
+        ingreso : function (prices, estimateAssistance){
+        let ingre = prices * estimateAssistance
+        return ingre.toLocaleString()
+    },
+        porcentajeDeAsistencia : function (capacity, estimateAssistance ){
+        let porcentaje = (estimateAssistance / (capacity/100) ).toFixed(2) 
+        return porcentaje 
+
+    },
+        newPropiedadPorcentaje: function (data){
+            
+        let list = []
+        let filteredAssistance = data.events.filter(event => event.assistance)
+
+        for (let i = 0; i < filteredAssistance.length; i++) {
+            list.push(filteredAssistance[i]);
+            
+        
+        
+            list[i].percentage = this.porcentajeDeAsistencia(list[i].capacity, list[i].assistance);
+           
+    }
+    
+    return [...list.sort((event1, event2) => event2.percentage - event1.percentage)]
+    
+        },
+        maxPercentaje : function (evento2){
+            let ordenMax = [...evento2.sort((event1, event2)=> event2.percentaje - event1.percentaje)]
+           this.percentajeMinMax[0] = {name:ordenMax[0].name + " with" , percentaje:ordenMax[0].percentaje + "%" }
+        },
+        minPercentaje : function (evento2){
+            let ordenMin = [...evento2.sort((event1, event2) => event1.percentaje - event2.percentaje )]
+           this.percentajeMinMax[1] = {name: ordenMin[0].name + "with", percentaje: ordenMin[0].percentaje + "%"}
+        },
+        maxCapacidad : function (evento){
+            let capacidadMinMax = evento.sort((event1, event2)=> event2.capacity - event1.capacity)
+            this.percentajeMinMax[2] = {name: capacidadMinMax[0].name + "with", capacity: (capacidadMinMax[0].capacity).toLocaleString() + " of capacity."}
+        }
+
+
+}
+}).mount("#app")
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*let $stat1 = document.getElementById("tabla1")
 let $stat2 = document.getElementById("tabla2")
 let $stat3 = document.getElementById("tabla3")
 
 let list;
 
-fetch("https://mindhub-xj03.onrender.com/api/amazing")
-.then(response => response.json())
+fetch("https://mindhub-xj03.onrender.com/api/amazing") 
+.then(response => response.json()) 
 .then(datos => {
     list = datos
     generadorPast (list, $stat3)
     generadorUpcoming (list, $stat2)
-    mayorCapacity(list.events)
+    mayorCapacity(list.eventos)
     let filtro = armadoDeNuevaLista(list)
     imprimirMayorPorcentaje(filtro)
     imprimirMenorPorcentaje(filtro)
@@ -59,23 +143,23 @@ function generadorUpcoming(losDatos, ubicacion){
 }
 
 // Funcion de multiplicacion
-//revenues
+
 function multiplicacion(dato1, dato2){
     return (dato1 * dato2).toLocaleString()
 }
 
-/* console.log (multiplicacion (15,10)) */
 
-// Funcion de porcentaje
-//dato1 capacidad (siempre es mayor) dato2 asistencia
+
+// Funcion de porcentaje capacidad por asistencia o estimado
+
 function porcentaje(dato1, dato2){
-    return ( dato2 / (dato1/100) ).toFixed (2)
+    return ( dato2 / (dato1/100) ).toFixed (2) 
 }
 
 //Events statistics
 
 function mayorCapacity (eventos){
-    let mayorCapacity = eventos.sort((a,b) => b.capacity - a.capacity)
+    let mayorCapacity = eventos.sort((a,b) => b.capacity - a.capacity) 
     document.getElementById ("eventmayor").innerHTML = mayorCapacity[0].name
 }
 
@@ -97,4 +181,4 @@ function imprimirMayorPorcentaje(nuevoEvento){
 
 function imprimirMenorPorcentaje(nuevoEvento){
     document.getElementById("meporcentaje").innerHTML = `${nuevoEvento[nuevoEvento.length-1].name} ${nuevoEvento[nuevoEvento.length-1].percentage}`
-}
+}*/
